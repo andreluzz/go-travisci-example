@@ -22,9 +22,6 @@ func FizzBuzz(num int) string {
 
 
 func ReadXml() string {
-	result, err := xml.Parser()
-	if err != nil {
-		return ""
-	}
+	result, _ := xml.Parser()
 	return result
 }
