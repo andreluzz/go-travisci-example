@@ -17,6 +17,7 @@ install:
   - set PATH=%GOPATH%\bin;c:\go\bin;%PATH%
   - go version
   - go env
+  - go get -v -t -d ./...
 
 build_script:
   - go build -o _buildOutput\go-travisci-example.exe -i .

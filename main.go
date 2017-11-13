@@ -9,4 +9,5 @@ func main() {
 	for i := 0; i <= 15; i++ {
 		fmt.Println(app.FizzBuzz(i))
 	}
+	fmt.Println(app.ReadXml())
 }

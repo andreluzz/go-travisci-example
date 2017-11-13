@@ -1,6 +1,9 @@
 package app
 
-import "strconv"
+import (
+	"strconv"
+	"github.com/andreluzz/go-travisci-example/xml"
+)
 
 func FizzBuzz(num int) string {
 	div3 := (num % 3) == 0
@@ -15,4 +18,13 @@ func FizzBuzz(num int) string {
 	} else {
 		return strconv.Itoa(num)
 	}
+}
+
+
+func ReadXml() string {
+	result, err := xml.Parser()
+	if err != nil {
+		return ""
+	}
+	return result
 }
