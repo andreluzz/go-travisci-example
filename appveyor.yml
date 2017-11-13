@@ -22,7 +22,7 @@ build_script:
   - go build -o _buildOutput\go-travisci-example.exe -i .
 
 test_script:
-  - ps: testCoverage.cmd
+  - ps: .\testCoverage.cmd
 
 after_test:
   - ps: |
@@ -36,7 +36,7 @@ artifacts:
 
 deploy:
   release: go-travisci-example-$(appveyor_build_version)
-  description: 'This is a release of my awesome application.'
+  description: 'This is a release of my test CI application.'
   provider: GitHub
   auth_token:
     secure: KCODRnczSNMcb2lOfyD6PIcER+65jr9jhFOpAprxl9KpCWPcVd7HvNeStQkHjKVp
