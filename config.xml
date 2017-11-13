@@ -4,4 +4,6 @@
     <!--These are all known people-->
     <Person name="Jon"/>
     <Person name="Sally"/>
+    <Person name="Billy"/>
+    <Person name="Linda"/>
 </People>
