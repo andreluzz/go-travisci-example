@@ -1,0 +1,47 @@
+version: 2.0.{build}
+
+platform: x64
+
+branches:
+  only:
+    - master
+
+clone_folder: c:\gopath\src\github.com\andreluzz\go-travisci-example
+
+environment:
+  GOPATH: c:\gopath
+
+install:
+  - echo %PATH%
+  - echo %GOPATH%
+  - set PATH=%GOPATH%\bin;c:\go\bin;%PATH%
+  - go version
+  - go env
+
+build_script:
+  - go build -o _buildOutput\go-travisci-example.exe -i .
+
+test_script:
+  - ps: testCoverage.cmd
+
+after_test:
+  - ps: |
+        $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
+        Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
+        bash codecov.sh -f "cover.txt" -t 6c33dd73-92a1-4527-a4e7-994c3c1a8e1f
+
+artifacts:
+  - path: _buildOutput\go-travisci-example.exe
+    name: binary
+
+deploy:
+  release: go-travisci-example-$(appveyor_build_version)
+  description: 'This is a release of my awesome application.'
+  provider: GitHub
+  auth_token:
+    secure: KCODRnczSNMcb2lOfyD6PIcER+65jr9jhFOpAprxl9KpCWPcVd7HvNeStQkHjKVp
+  artifact: binary # This is the name we specified in the artifacts section.
+  draft: false
+  prerelease: false
+  on:
+    branch: master

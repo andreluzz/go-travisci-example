@@ -1,7 +1,9 @@
+os:
+  - windows
+
 language: go
 
 go:
-  - 1.9.x
   - tip
 
 before_install:
