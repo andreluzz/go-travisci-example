@@ -30,13 +30,15 @@ build_script:
 
 test_script:
 - ps: >-
-    go test -race -coverprofile=profile.out -covermode=atomic ./app
+    go list ./...
+    
+    go test -race -coverprofile=profile.out -covermode=atomic app
     
     cat profile.out >> coverage.txt
     
     rm profile.out
     
-    go test -race -coverprofile=profile.out -covermode=atomic ./xml
+    go test -race -coverprofile=profile.out -covermode=atomic xml
 
     cat profile.out >> coverage.txt
     
