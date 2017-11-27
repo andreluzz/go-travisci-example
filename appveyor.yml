@@ -32,13 +32,13 @@ test_script:
 - ps: >-
     go list ./...
     
-    go test -race -coverprofile=profile.out -covermode=atomic app
+    go test -race -coverprofile=profile.out -covermode=atomic github.com/andreluzz/go-travisci-example/app
     
     cat profile.out >> coverage.txt
     
     rm profile.out
     
-    go test -race -coverprofile=profile.out -covermode=atomic xml
+    go test -race -coverprofile=profile.out -covermode=atomic github.com/andreluzz/go-travisci-example/xml
 
     cat profile.out >> coverage.txt
     
