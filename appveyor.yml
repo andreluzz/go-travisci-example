@@ -30,7 +30,17 @@ build_script:
 
 test_script:
 - ps: >-
-    bash testCoverage.sh
+    go test -race -coverprofile=profile.out -covermode=atomic ./app
+    
+    cat profile.out >> coverage.txt
+    
+    rm profile.out
+    
+    go test -race -coverprofile=profile.out -covermode=atomic ./xml
+
+    cat profile.out >> coverage.txt
+    
+    rm profile.out
 
     $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
 
