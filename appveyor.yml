@@ -26,24 +26,18 @@ install:
     go get -v -t -d ./...
 
 build_script:
-- cmd: echo %APPVEYOR_BUILD_VERSION%
-- cmd: go build -ldflags "-X main.version=%APPVEYOR_BUILD_VERSION%" -o _buildOutput\go-travisci-example_v2.exe -i .
+- ps: >-
+    bash
+    
+    version=%APPVEYOR_BUILD_VERSION%
+    
+    go build -ldflags "-X main.version=$version" -o _buildOutput\go-travisci-example_v2.exe -i .
+    
+    exit
 
 test_script:
 - ps: >-
-    go list ./...
-    
-    go test -race -coverprofile=profile.out -covermode=atomic github.com/andreluzz/go-travisci-example/app
-    
-    cat profile.out >> coverage.txt
-    
-    rm profile.out
-    
-    go test -race -coverprofile=profile.out -covermode=atomic github.com/andreluzz/go-travisci-example/xml
-
-    cat profile.out >> coverage.txt
-    
-    rm profile.out
+    bash testCoverage.sh
 
     $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
 
