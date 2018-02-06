@@ -26,7 +26,10 @@ install:
     go get -v -t -d ./...
 
 build_script:
-- cmd: go build -ldflags "-X main.version=2.1.{build}" -o _buildOutput\go-travisci-example_v2.exe -i .
+- cmd: >-
+    $env:MY_VARIABLE=2.1.{build}
+
+    go build -ldflags "-X main.version=$env:MY_VARIABLE" -o _buildOutput\go-travisci-example_v2.exe -i .
 
 
 test_script:
