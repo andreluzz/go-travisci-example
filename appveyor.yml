@@ -26,8 +26,8 @@ install:
     go get -v -t -d ./...
 
 build_script:
-- cmd: >-
-    $env:MY_VARIABLE=2.1.{build}
+- ps: >-
+    $env:MY_VARIABLE=$(appveyor_build_version)
 
     go build -ldflags "-X main.version=$env:MY_VARIABLE" -o _buildOutput\go-travisci-example_v2.exe -i .
 
