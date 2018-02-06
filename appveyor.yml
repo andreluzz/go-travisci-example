@@ -26,6 +26,7 @@ install:
     go get -v -t -d ./...
 
 build_script:
+- cmd: echo %APPVEYOR_BUILD_VERSION%
 - cmd: go build -ldflags "-X main.version=%APPVEYOR_BUILD_VERSION%" -o _buildOutput\go-travisci-example_v2.exe -i .
 
 test_script:
