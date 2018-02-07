@@ -10,13 +10,15 @@ clone_folder: c:\gopath\src\github.com\andreluzz\go-travisci-example
 
 environment:
   GOPATH: c:\gopath
-  APP_VERSION: 2.0.{build}
+  APPVERSION: 2.0.{build}
 
 install:
 - cmd: >-
     echo %PATH%
 
     echo %GOPATH%
+    
+    echo %APPVERSION%
 
     set PATH=%GOPATH%\bin;c:\go\bin;%PATH%
 
@@ -27,17 +29,11 @@ install:
     go get -v -t -d ./...
 
 build_script:
-- ps: >-
-    echo %APP_VERSION%
+- cmd: >-
+    echo %APPVERSION%
     
-    bash
+    go build -ldflags "-X main.version=%APPVERSION%" -o _buildOutput\go-travisci-example_v2.exe -i .
     
-    version=%APPVEYOR_BUILD_VERSION%
-    
-    go build -ldflags "-X main.version=$version" -o _buildOutput\go-travisci-example_v2.exe -i .
-    
-    echo $version
-
 test_script:
 - ps: >-
     bash testCoverage.sh
