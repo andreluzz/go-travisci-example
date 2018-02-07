@@ -10,7 +10,7 @@ clone_folder: c:\gopath\src\github.com\andreluzz\go-travisci-example
 
 environment:
   GOPATH: c:\gopath
-  APPVERSION: 2.0.{build}
+  APPVERSION: $(appveyor_build_version)
 
 install:
 - cmd: >-
